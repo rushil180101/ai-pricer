@@ -1,7 +1,8 @@
 import json
 from pathlib import Path
-from datasets import Dataset
+from datasets import Dataset, DatasetDict
 from huggingface_hub import login
+from sklearn.model_selection import train_test_split
 from models.item import Item
 from common.loggers import hf_dataset_upload_logger
 from common.constants import (
@@ -60,9 +61,20 @@ class HFDatasetUploader:
         hf_dataset_upload_logger.info(f"Created dataset with {total_records} records")
 
     def push_dataset_to_hub(self) -> None:
-        dataset = Dataset.from_list(self.records)
+        data = self.records
+        train_data, temp_data = train_test_split(data, test_size=0.2, random_state=42)
+        val_data, test_data = train_test_split(
+            temp_data, test_size=0.5, random_state=42
+        )
+        dataset_dict = DatasetDict(
+            {
+                "train": Dataset.from_list(train_data),
+                "validation": Dataset.from_list(val_data),
+                "test": Dataset.from_list(test_data),
+            }
+        )
         login(token=HF_TOKEN, add_to_git_credential=True)
-        dataset.push_to_hub(repo_id=self.repo_id, private=self.private)
+        dataset_dict.push_to_hub(repo_id=self.repo_id, private=self.private)
         hf_dataset_upload_logger.info("Successfully pushed dataset to huggingface")
 
     def upload(self, raw_dataset_dir: str, processed_dataset_dir: str) -> None:
