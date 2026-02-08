@@ -1,0 +1,14 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv(override=True)
+
+HF_TOKEN = os.getenv("HF_TOKEN")
+HF_PREPROCESSED_DATASET_REPO_ID = os.getenv("HF_PREPROCESSED_DATASET_REPO_ID")
+
+OPENROUTER_BASE_URL = os.getenv("OPENROUTER_BASE_URL")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+LOCAL_OLLAMA_BASE_URL = "http://localhost:11434"
+LOCAL_OLLAMA_MODEL = "gemma:1b"
