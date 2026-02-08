@@ -21,3 +21,7 @@ python -m dataset.data_loader
 ```bash
 python -m dataset.upload_dataset
 ```
+
+# Models performance comparison
+
+- The performance of various models can be checked within the `arena` directory.
