@@ -45,7 +45,7 @@ class DatasetPreprocessor:
             "model": self.model,
             "messages": [
                 {"role": "system", "content": TEXT_PREPROCESSING_SYSTEM_PROMPT},
-                {"role": "user", "content": f"Product data: {item.to_json()}"},
+                {"role": "user", "content": item.to_json()},
             ],
             "max_tokens": 1000,
         }

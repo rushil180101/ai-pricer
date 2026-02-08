@@ -24,6 +24,7 @@ def parse(datapoint: dict, category: str) -> Optional[Item]:
     global item_idx
     title = datapoint["title"]
     price = datapoint["price"]
+    category = category.replace("raw_meta_", "")
     price_pattern = r"^\d+(\.\d+)?$"
     if not re.match(price_pattern, price):
         return

@@ -29,7 +29,7 @@ class DatasetHandler:
         self.dataset_categories = dataset_categories
         # relative path with reference to repo root
         self.dataset_storage_dir = "dataset/batch_files"
-        self.preprocessed_dataset_storage_dir = "dataset/preprocesed_batch_files"
+        self.preprocessed_dataset_storage_dir = "dataset/preprocessed_batch_files"
         self.batch_size = BATCH_SIZE
         self.max_datapoints_per_category = MAX_DATAPOINTS_PER_CATEGORY
         self.dataset_preprocessor = DatasetPreprocessor()
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     dataset_handler = DatasetHandler(
         hf_dataset_path=DATASET_NAME, dataset_categories=categories
     )
-    # dataset_handler.get_dataset()
+    dataset_handler.get_dataset()
     if SHOULD_PREPROCESS_DATA:
         dataset_handler.preprocess()
     logger.info("Successfully downloaded entire dataset")

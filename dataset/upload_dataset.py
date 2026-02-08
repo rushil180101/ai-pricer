@@ -27,7 +27,6 @@ class HFDatasetUploader:
                     data = json.loads(line)
                     item_id = data["custom_id"]
                     product_data = data["body"]["messages"][1]["content"]
-                    product_data = product_data.replace("Product data: ", "")
                     product_data = json.loads(product_data)
                     item = Item(**product_data)
                     self.items[item_id] = item
