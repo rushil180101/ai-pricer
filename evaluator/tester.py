@@ -87,5 +87,7 @@ class Tester:
         self.report()
 
     @classmethod
-    def test(cls, function, data=test_ds):
-        cls(function, data).run()
+    def test(cls, function, data=test_ds, max_datapoints=-1):
+        if max_datapoints != -1:
+            data = data[:max_datapoints]
+        cls(function, data, size=max_datapoints).run()

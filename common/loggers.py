@@ -31,6 +31,8 @@ def get_rotating_logger(
     return logger
 
 
+# Loggers for different modules
+
 dataset_logger = get_rotating_logger(
     name="dataset_logger",
     log_file="dataset_handling_logs.log",
@@ -39,4 +41,9 @@ dataset_logger = get_rotating_logger(
 hf_dataset_upload_logger = get_rotating_logger(
     name="hf_dataset_upload_logger",
     log_file="hf_dataset_uploading_logs.log",
+)
+
+fine_tune_frontier_logger = get_rotating_logger(
+    name="fine_tune_frontier_logger",
+    log_file="fine_tune_frontier_logs.log",
 )
