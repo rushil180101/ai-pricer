@@ -1,6 +1,31 @@
 # AI Pricer
 Predict the price of Amazon product by providing its description.
 
+# Project setup
+
+- Install required dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+- Create `.env` file in repo root directory and set the following values
+
+```bash
+
+# openrouter
+OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+OPENROUTER_API_KEY=<api-key>
+
+# huggingface
+HF_TOKEN=<hf-token>
+HF_PREPROCESSED_DATASET_REPO_ID=<dataset-repo-id>
+
+# openai
+OPENAI_API_KEY=<api-key>
+
+```
+
 # Handling dataset
 
 - To download the dataset, execute this command from repo root directory
