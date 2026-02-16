@@ -60,12 +60,24 @@ class HFDatasetUploader:
         total_records = len(self.records)
         hf_dataset_upload_logger.info(f"Created dataset with {total_records} records")
 
-    def push_dataset_to_hub(self) -> None:
+    def push_dataset_to_hub(self, should_round: bool = False) -> None:
         data = self.records
         train_data, temp_data = train_test_split(data, test_size=0.2, random_state=42)
         val_data, test_data = train_test_split(
             temp_data, test_size=0.5, random_state=42
         )
+
+        if should_round:
+            hf_dataset_upload_logger.info("Rounding off completion")
+            for datapoint in train_data:
+                datapoint["completion"] = (datapoint["completion"].split("."))[
+                    0
+                ] + ".00"
+            for datapoint in val_data:
+                datapoint["completion"] = (datapoint["completion"].split("."))[
+                    0
+                ] + ".00"
+
         dataset_dict = DatasetDict(
             {
                 "train": Dataset.from_list(train_data),
@@ -82,6 +94,26 @@ class HFDatasetUploader:
         self.read_processed_dataset(processed_dataset_dir=processed_dataset_dir)
         self.create_dataset()
         self.push_dataset_to_hub()
+
+    def read_prompt_dataset(self, dataset_dir: str) -> None:
+        hf_dataset_upload_logger.info("Proceeding to read simple dataset")
+        dataset_dir = Path(dataset_dir)
+        for file_path in dataset_dir.glob("*.jsonl"):
+            with open(file_path, "r") as f:
+                for line in f.readlines():
+                    data = json.loads(line)
+                    item_id = data["item_id"]
+                    item = Item(**data)
+                    self.items[item_id] = item
+        total_items = len(self.items.keys())
+        hf_dataset_upload_logger.info(f"Read simple dataset with {total_items} items")
+
+    def upload_prompt_dataset(
+        self, dataset_dir: str, should_round: bool = False
+    ) -> None:
+        self.read_prompt_dataset(dataset_dir=dataset_dir)
+        self.create_dataset()
+        self.push_dataset_to_hub(should_round=should_round)
 
 
 if __name__ == "__main__":

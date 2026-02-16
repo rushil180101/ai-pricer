@@ -42,6 +42,9 @@ python -m dataset.data_loader
     - This will upload the dataset (combines raw data with preprocessed/rewritten data from both local dataset directories) to huggingface
     - Repo id for the huggingface dataset should be set in `.env` file (`HF_PREPROCESSED_DATASET_REPO_ID=<your-repo-id>`)
     - My dataset can be found here: https://huggingface.co/datasets/rushil180101/ai-pricer-project-preprocessed
+        - **Train - 3081**
+        - **Validation - 385**
+        - **Test - 386**
 
 ```bash
 python -m dataset.upload_dataset

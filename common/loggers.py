@@ -47,3 +47,8 @@ fine_tune_frontier_logger = get_rotating_logger(
     name="fine_tune_frontier_logger",
     log_file="fine_tune_frontier_logs.log",
 )
+
+fine_tune_open_source_logger = get_rotating_logger(
+    name="fine_tune_open_source_logger",
+    log_file="fine_tune_open_source_logs.log",
+)
