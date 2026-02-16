@@ -69,14 +69,17 @@ class HFDatasetUploader:
 
         if should_round:
             hf_dataset_upload_logger.info("Rounding off completion")
-            for datapoint in train_data:
-                datapoint["completion"] = (datapoint["completion"].split("."))[
-                    0
-                ] + ".00"
-            for datapoint in val_data:
-                datapoint["completion"] = (datapoint["completion"].split("."))[
-                    0
-                ] + ".00"
+            for i, dp in enumerate(train_data):
+                dp["completion"] = (dp["completion"].split("."))[0] + ".00"
+                train_data[i] = {"prompt": dp["prompt"], "completion": dp["completion"]}
+            for i, dp in enumerate(val_data):
+                dp["completion"] = (dp["completion"].split("."))[0] + ".00"
+                val_data[i] = {"prompt": dp["prompt"], "completion": dp["completion"]}
+
+            test_data = [
+                {"prompt": dp["prompt"], "completion": dp["completion"]}
+                for dp in test_data
+            ]
 
         dataset_dict = DatasetDict(
             {

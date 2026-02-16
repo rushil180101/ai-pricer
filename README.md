@@ -45,6 +45,7 @@ python -m dataset.data_loader
         - **Train - 3081**
         - **Validation - 385**
         - **Test - 386**
+    - Dataset with `prompt` and `completion`: rushil180101/ai-pricer-fine-tune-open-source-model
 
 ```bash
 python -m dataset.upload_dataset
