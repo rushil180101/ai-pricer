@@ -54,3 +54,8 @@ python -m dataset.upload_dataset
 # Models performance comparison
 
 - The performance of various models can be checked within the `arena` directory.
+
+# Agents
+
+- Multiple agents contribute in price prediction.
+- Agents can be viewed within `agents` directory.

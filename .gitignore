@@ -10,3 +10,6 @@ __pycache__/
 
 # logs
 *.log
+
+# vector db
+vector_db/
