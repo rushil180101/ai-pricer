@@ -1,5 +1,4 @@
 import feedparser
-import os
 import re
 import requests
 from bs4 import BeautifulSoup
@@ -17,8 +16,8 @@ SYSTEM_PROMPT = """
     You are given a list of deals on various products along with the product description and its deal price.
     You are also given another main product description which the user wants to buy. Your job is to figure out
     if there are any deal products which match the user's requirement. Return the list of matching deal products.
-    If no deals match user's product requirements, then do not return anything. ALso rephrase the product
-    description in matching deals to summarize it in 2-3 sentences.
+    If no deals match user's product requirements, then do not return anything. Also rephrase the product
+    description in matching deals to summarize it in 2-3 sentences. Preserve the url of each product deal page.
     """
 USER_PROMPT = """
     Here is the user provided product description: {product_description}\n
@@ -68,6 +67,7 @@ class DealsFetcher:
                     f"Title: {title}",
                     f"Summary: {summary}",
                     f"Price: ${price}",
+                    f"Url: {url}",
                 ]
                 deal_content = "\n".join(contents)
                 deals.append(deal_content)
