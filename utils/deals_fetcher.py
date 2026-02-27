@@ -13,18 +13,11 @@ RSS_FEED_URLS = ["https://bargainbabe.com/amazon-deals/feed/"]
 MAX_DEALS = 10
 
 SYSTEM_PROMPT = """
-    You are given a list of deals on various products along with the product description and its deal price.
-    You are also given another main product description which the user wants to buy. Your job is to figure out
-    if there are any deal products which match the user's requirement. Return the list of matching deal products.
-    If no deals match user's product requirements, then do not return anything. Also rephrase the product
-    description in matching deals to summarize it in 2-3 sentences. Preserve the url of each product deal page.
+    You are responsible for rephrasing product details into a short summary. 
     """
 USER_PROMPT = """
-    Here is the user provided product description: {product_description}\n
-    Following is the list of general deals found from various sources\n
-    {deals}\n
-    Return the most relevant deals which match user's product requirements.
-    If no deals match, then do not return anything.
+    Here is the list of product descriptions. Rephrase the product details\n
+    {deals}
     """
 MODEL = "gpt-4.1-nano"
 
@@ -74,16 +67,13 @@ class DealsFetcher:
 
         return deals
 
-    def get_relevant_deals(self, product_description: str) -> DealSelection:
+    def get_deals(self) -> DealSelection:
         scraped_deals = self.scrape_deals()
         messages = [
             {"role": "system", "content": SYSTEM_PROMPT},
             {
                 "role": "user",
-                "content": USER_PROMPT.format(
-                    product_description=product_description,
-                    deals="\n\n".join(scraped_deals),
-                ),
+                "content": USER_PROMPT.format(deals="\n\n".join(scraped_deals)),
             },
         ]
         response = self.openai_client.chat.completions.parse(
