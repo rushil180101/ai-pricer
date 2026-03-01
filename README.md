@@ -9,8 +9,10 @@ app_file: app.py
 pinned: false
 ---
 
-# AI Pricer
-Predict the price of Amazon product by providing its description.
+# AI Pricer + Deals Finder
+- Live on huggingface: https://huggingface.co/spaces/rushil180101/ai-pricer
+- Let AI find the best deals on various products
+- Lets agents do the heavy lifting
 
 # Project setup
 
@@ -85,6 +87,14 @@ python -m dataset.upload_dataset
         - Frontier agent - Uses RAG + frontier models for price prediction
         - Specialist agent - Uses fine-tuned model for price prediction (This is deployed on https://modal.com/)
     - Messaging agent - Notifies user for best product deals (https://pushover.net/)
-- Agents can be viewed within `agents` directory.
+- Agents' code can be viewed within `agents` directory.
+
+- Datasets
+    - Original Amazon products dataset: https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023
+    - Custom preprocessed/rewritten dataset: https://huggingface.co/datasets/rushil180101/ai-pricer-project-preprocessed
+    - Custom dataset used for fine-tuning: https://huggingface.co/datasets/rushil180101/ai-pricer-fine-tune-open-source-model
+
+- Models
+    - Fine-tuned model: https://huggingface.co/rushil180101/pricer-2026-02-19T15-32-44
 
 ![Sample output](project_output.png)
