@@ -44,8 +44,8 @@ fonttools==4.61.1
 frozenlist==1.8.0
 fsspec==2025.3.0
 googleapis-common-protos==1.72.0
-gradio==6.8.0
-gradio_client==2.2.0
+gradio
+gradio_client
 groovy==0.1.2
 grpcio==1.78.1
 grpclib==0.4.9
