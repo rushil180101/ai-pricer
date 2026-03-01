@@ -8,7 +8,7 @@ VECTOR_DB_PATH = "vector_db"
 VECTOR_DB_COLLECTION_NAME = "products"
 EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 RAW_DATASET_NAME = "rushil180101/ai-pricer-project-preprocessed"
-CHAT_MODEL_NAME = "openai/gpt-oss-120b:free"
+CHAT_MODEL_NAME = "gpt-4.1-nano"
 
 
 class FrontierAgent(Agent):

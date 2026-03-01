@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv(override=True)
 
 RSS_FEED_URLS = ["https://bargainbabe.com/amazon-deals/feed/"]
-MAX_DEALS = 10
+MAX_DEALS = 5
 
 SYSTEM_PROMPT = """
     You are responsible for rephrasing product details into a short summary. 

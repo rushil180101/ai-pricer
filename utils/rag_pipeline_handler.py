@@ -105,10 +105,7 @@ class RagPipelineHandler:
         self.raw_dataset_name = raw_dataset_name
         self.vector_db_manager = vector_db_manager
         self.chat_model_name = chat_model_name
-        self.openai_client = OpenAI(
-            base_url=os.getenv("OPENROUTER_BASE_URL"),
-            api_key=os.getenv("OPENROUTER_API_KEY"),
-        )
+        self.openai_client = OpenAI()
         self.logger = get_rotating_logger(
             "rag_pipeline_logger", "rag_pipeline_logger.log"
         )

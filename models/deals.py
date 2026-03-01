@@ -12,4 +12,4 @@ class Deal(BaseModel):
 
 class DealSelection(BaseModel):
 
-    deals: List[Deal] = Field(description="List of 5 deals")
+    deals: List[Deal] = Field(description="List of deals")

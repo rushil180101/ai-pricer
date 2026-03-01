@@ -13,7 +13,7 @@ image = Image.debian_slim().pip_install(
 )
 secrets = [
     modal.Secret.from_name("huggingface-secret"),
-    modal.Secret.from_name("openrouter-secret"),
+    modal.Secret.from_name("openai-secret"),
 ]
 hf_cache_volume = Volume.from_name("hf-hub-cache", create_if_missing=True)
 
@@ -23,8 +23,7 @@ FINE_TUNED_MODEL_NAME = "rushil180101/pricer-2026-02-19T15-32-44"
 GPU = "T4"
 TIMEOUT = 900
 CACHE_DIR = "/cache"
-OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
-PREPROCESSOR_MODEL_NAME = "google/gemma-3-27b-it:free"
+PREPROCESSOR_MODEL_NAME = "gpt-4.1-nano"
 TEXT_PREPROCESSING_SYSTEM_PROMPT = """
 Create a concise description of a product based on the provided details. Respond in the following format
 Title: title of the product (for example, Microwave oven)
@@ -55,11 +54,7 @@ class Pricer:
         from peft import PeftModel
         from openai import OpenAI
 
-        openrouter_api_key = os.getenv("OPENROUTER_API_KEY")
-        self.openai_client = OpenAI(
-            base_url=OPENROUTER_BASE_URL,
-            api_key=openrouter_api_key,
-        )
+        self.openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
         self.quant_config = BitsAndBytesConfig(
             load_in_4bit=True,
