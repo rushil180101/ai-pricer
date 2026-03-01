@@ -1,3 +1,14 @@
+---
+title: AI Pricer + Deals finder
+emoji: 📚
+colorFrom: green
+colorTo: purple
+sdk: gradio
+sdk_version: 6.2.0
+app_file: app.py
+pinned: false
+---
+
 # AI Pricer
 Predict the price of Amazon product by providing its description.
 
