@@ -24,7 +24,15 @@ HF_PREPROCESSED_DATASET_REPO_ID=<dataset-repo-id>
 # openai
 OPENAI_API_KEY=<api-key>
 
+# wandb
+WANDB_API_KEY=<api-key>
+
+# pushover
+PUSHOVER_USER=<user-token>
+PUSHOVER_TOKEN=<app-token>
+
 ```
+
 
 # Handling dataset
 
@@ -55,7 +63,16 @@ python -m dataset.upload_dataset
 
 - The performance of various models can be checked within the `arena` directory.
 
-# Agents
+![Bar Chart](arena/model_comparison_results.png)
+
+# Agentic project
 
 - Multiple agents contribute in price prediction.
+    - Autonomous planning agent - Task orchestration
+    - Scanner agent - Scans rss feeds for deals
+    - Ensemble agent - Combination of fine-tuned model and RAG
+        - Frontier agent - Uses RAG + frontier models for price prediction
+        - Specialist agent - Uses fine-tuned model for price prediction (This is deployed on https://modal.com/)
+    - Messaging agent - Notifies user for best product deals (https://pushover.net/)
 - Agents can be viewed within `agents` directory.
+
