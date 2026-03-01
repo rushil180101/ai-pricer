@@ -107,7 +107,7 @@ class RagPipelineHandler:
         self.chat_model_name = chat_model_name
         self.openai_client = OpenAI()
         self.logger = get_rotating_logger(
-            "rag_pipeline_logger", "rag_pipeline_logger.log"
+            "rag_pipeline_handler", "rag_pipeline_handler.log"
         )
         self.setup()
 

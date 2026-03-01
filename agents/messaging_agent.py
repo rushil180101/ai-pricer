@@ -49,4 +49,4 @@ class MessagingAgent(Agent):
         response = requests.post(self.pushover_url, data=payload)
         assert response.status_code == HTTPStatus.OK
         self.logger.info("Message delivered successfully")
-        return "OK, message delivered successfully"
+        return message

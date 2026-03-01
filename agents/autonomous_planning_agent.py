@@ -78,6 +78,7 @@ class AutonomousPlanningAgent(Agent):
         self.deals = []
         self.deal_prices = []
         self.actual_prices = []
+        self.results = []
 
     def scan_deals(self) -> str:
         self.logger.info("Scanning rss feeds for deals")
@@ -113,12 +114,12 @@ class AutonomousPlanningAgent(Agent):
         self.logger.info("Notifying user about the best deals")
         data = zip(self.deal_prices, self.actual_prices, self.deals)
         data = sorted(data, key=lambda x: x[1] - x[0], reverse=True)
-        response = None
-        for i in range(min(2, len(data))):
+        for i in range(min(3, len(data))):
             product_details = data[i][2]
-            response = self.messaging_agent.notify(product_details)
+            message = self.messaging_agent.notify(product_details)
+            self.results.append((message, data[i][1], data[i][0]))
         self.logger.info("Notifications sent successfully")
-        return response
+        return "OK, user notified successfully"
 
     def get_tools(self) -> List[dict]:
         return [
@@ -144,7 +145,7 @@ class AutonomousPlanningAgent(Agent):
             )
         return results
 
-    def execute(self) -> None:
+    def execute(self) -> List[tuple]:
         self.logger.info("Starting execution")
         done = False
         messages = self.messages
@@ -163,6 +164,6 @@ class AutonomousPlanningAgent(Agent):
             else:
                 self.logger.info("No tool calling")
                 done = True
-        reply = response.choices[0].message.content
         self.logger.info("Agent execution completed")
-        return reply
+
+        return self.results
