@@ -107,7 +107,6 @@ opentelemetry-semantic-conventions==0.60b1
 orjson==3.11.7
 overrides==7.7.0
 packaging==26.0
-pandas==3.0.0
 parso==0.8.5
 pathspec==1.0.4
 peft==0.18.1
