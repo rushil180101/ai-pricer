@@ -40,6 +40,10 @@ OPENAI_API_KEY=<api-key>
 # wandb
 WANDB_API_KEY=<api-key>
 
+# modal
+MODAL_TOKEN_ID=<token-id>
+MODAL_TOKEN_SECRET=<token-secret>
+
 # pushover
 PUSHOVER_USER=<user-token>
 PUSHOVER_TOKEN=<app-token>
